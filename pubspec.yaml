@@ -47,10 +47,10 @@ dependencies:
   # Location
   geolocator: ^10.0.0
 
-  # Notifications
+  # Notifications (移动端推送，Windows桌面版暂不使用)
   flutter_local_notifications: ^17.0.0
-  firebase_core: ^2.24.2
-  firebase_messaging: ^14.7.10
+  # firebase_core: ^2.24.2  # 仅在Android/iOS使用
+  # firebase_messaging: ^14.7.10  # 仅在Android/iOS使用
 
 dev_dependencies:
   flutter_test:

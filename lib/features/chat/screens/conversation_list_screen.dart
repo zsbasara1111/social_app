@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/theme/app_theme.dart';
@@ -10,14 +9,16 @@ import '../models/chat_models.dart';
 import '../providers/chat_provider.dart';
 import 'chat_screen.dart';
 
-class ChatListScreen extends ConsumerStatefulWidget {
-  const ChatListScreen({super.key});
+class ConversationListScreen extends ConsumerStatefulWidget {
+  const ConversationListScreen({super.key});
 
   @override
-  ConsumerState<ChatListScreen> createState() => _ChatListScreenState();
+  ConsumerState<ConversationListScreen> createState() =>
+      _ConversationListScreenState();
 }
 
-class _ChatListScreenState extends ConsumerState<ChatListScreen> {
+class _ConversationListScreenState
+    extends ConsumerState<ConversationListScreen> {
   @override
   Widget build(BuildContext context) {
     final conversationState = ref.watch(conversationsProvider);
@@ -58,15 +59,6 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
                     },
                   ),
                 ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // TODO: Start new chat
-          context.push('/match');
-        },
-        icon: const Icon(Icons.person_add),
-        label: const Text('新聊天'),
-        backgroundColor: AppTheme.primaryColor,
-      ),
     );
   }
 

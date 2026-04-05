@@ -10,6 +10,7 @@ import 'core/services/notification_service.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/performance_utils.dart';
 import 'core/utils/platform_utils.dart';
+import 'core/widgets/desktop_layout.dart';
 import 'config/router.dart';
 
 void main() async {
@@ -114,6 +115,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           routerConfig: router,
+          builder: (context, child) {
+            // 桌面端使用模拟手机界面
+            return ResponsiveLayout(
+              mobile: child ?? const SizedBox.shrink(),
+            );
+          },
         );
       },
     );

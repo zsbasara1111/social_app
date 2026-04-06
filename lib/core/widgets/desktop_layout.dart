@@ -45,85 +45,88 @@ class DesktopLayout extends StatelessWidget {
           return Center(
             child: Transform.scale(
               scale: finalScale,
-              child: Container(
+              child: SizedBox(
                 width: phoneWidth,
                 height: phoneHeight,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(40),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.3),
-                      blurRadius: 40,
-                      spreadRadius: 5,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: Column(
-                    children: [
-                      // 模拟手机顶部状态栏（刘海屏）
-                      if (showFrame)
-                        Container(
-                          height: 44,
-                          color: Colors.white,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 120,
-                                height: 35,
-                                decoration: const BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.vertical(
-                                    bottom: Radius.circular(18),
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    title ?? '缘分社交',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      // 内容区域
-                      Expanded(
-                        child: MediaQuery(
-                          // 覆盖 MediaQuery 使 ScreenUtil 正确计算
-                          data: MediaQuery.of(context).copyWith(
-                            size: const Size(phoneWidth, phoneHeight - 78),
-                            padding: EdgeInsets.zero,
-                            viewPadding: EdgeInsets.zero,
-                            viewInsets: EdgeInsets.zero,
-                          ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(40),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 40,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Stack(
+                      children: [
+                        // 内容区域 - 完整尺寸
+                        Positioned.fill(
                           child: child,
                         ),
-                      ),
-                      // 模拟底部指示条
-                      if (showFrame)
-                        Container(
-                          height: 34,
-                          color: Colors.white,
-                          child: Center(
+                        // 模拟手机顶部状态栏（刘海屏）
+                        if (showFrame)
+                          Positioned(
+                            top: 0,
+                            left: 0,
+                            right: 0,
                             child: Container(
-                              width: 134,
-                              height: 5,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(3),
+                              height: 44,
+                              color: Colors.transparent,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 120,
+                                    height: 35,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.circular(18),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        title ?? '缘分社交',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ),
-                    ],
+                        // 模拟底部指示条
+                        if (showFrame)
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Container(
+                              height: 34,
+                              color: Colors.transparent,
+                              child: Center(
+                                child: Container(
+                                  width: 134,
+                                  height: 5,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withValues(alpha: 0.2),
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),
